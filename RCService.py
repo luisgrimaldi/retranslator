@@ -70,5 +70,7 @@ def gpsAssetTracking(token, data):
 	response = requests.post(url, data=body, headers=headers)
 	if response.status_code != 200:
 		RCE.saveError(response)
+	else:
+		RCE.saveOK(response)
 	#print (response)
 	#return body

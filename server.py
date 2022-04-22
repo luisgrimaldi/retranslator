@@ -16,18 +16,20 @@ server.listen(15)
 
 def clientthread(conn):
 
+    serialNumber = ""
     while True:
         #Recibe datos del cliente
         data = conn.recv(65495)
         if not data:
             break
         print("\npackage" + data.decode() + "\n\n")
-        R.retranslate(data.decode())
+        serialNumber = R.retranslate(data.decode(), serialNumber)
          
             
         # el paquete fue recibido con exito
         conn.send("OK".encode())
         #test
+    conn.close()
 
 while True:
 
@@ -38,5 +40,5 @@ while True:
     t.daemon = True
     t.start()
 
-conn.close()
+#conn.close()
 sck.close()
