@@ -31,7 +31,11 @@ def retranslate(packages, serialNumber):
 		"shipment":"",
 		"speed":"",
 		"sats":"",
-		"unitType":""
+		"unitType":"",
+		"economico":"",
+		"height":"",
+		"temp":"",
+		"engine":""
 	}
 	#[placa]
 	serialNumbersRC={
@@ -109,8 +113,10 @@ def retranslate(packages, serialNumber):
 				RCS.gpsAssetTracking(token, data)			
 		elif serialNumberAux in serialNumbersBAFAR:
 			data["asset"] = serialNumbersBAFAR.get(serialNumberAux)[0]
-			data["unitType"] = serialNumbersBAFAR.get(serialNumberAux)[1]			
-			print("BAFAR	"+str(data))
+			data["unitType"] = serialNumbersBAFAR.get(serialNumberAux)[1]
+			BS.insertUnits(data)		
+			#print("BAFAR	"+str(data))
+
 	return serialNumberAux
 
 
