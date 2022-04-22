@@ -22,7 +22,7 @@ def clientthread(conn):
         data = conn.recv(65495)
         if not data:
             break
-        print("\npackage" + data.decode() + "\n\n")
+        #print("\npackage:    " + data.decode() + "\n\n")
         serialNumber = R.retranslate(data.decode(), serialNumber)
          
             
