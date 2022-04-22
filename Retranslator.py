@@ -122,30 +122,19 @@ def retranslate(packages, serialNumber):
 
 #test data 
 
-package = """#L#352094089692658;NA
-#D#200422;085200;2034.6566;N;10019.6076;W;0;0;2039.0;12;NA;NA;NA;NA;NA;prior:1:0,event_io_id:1:0,total_io:1:4,io_179:1:0,io_239:1:0,pwr_ext:2:12.321,io_66:1:12321,pwr_int:2:4.129,io_67:1:4129
-#D#200422;092200;2034.6566;N;10019.6076;W;0;0;2035.0;12;NA;NA;NA;NA;NA;prior:1:0,event_io_id:1:0,total_io:1:4,io_179:1:0,io_239:1:0,pwr_ext:2:12.322,io_66:1:12322,pwr_int:2:4.128,io_67:1:4128
-#D#200422;095200;2034.6566;N;10019.6076;W;0;0;2026.0;12;NA;NA;NA;NA;NA;prior:1:0,event_io_id:1:0,total_io:1:4,io_179:1:0,io_239:1:0,pwr_ext:2:12.322,io_66:1:12322,pwr_int:2:4.128,io_67:1:4128
-#D#200422;102200;2034.6566;N;10019.6076;W;0;0;2028.0;11;NA;NA;NA;NA;NA;prior:1:0,event_io_id:1:0,total_io:1:4,io_179:1:0,io_239:1:0,pwr_ext:2:12.322,io_66:1:12322,pwr_int:2:4.128,io_67:1:4128
-#D#200422;105200;2034.6566;N;10019.6076;W;0;0;2026.0;12;NA;NA;NA;NA;NA;prior:1:0,event_io_id:1:0,total_io:1:4,io_179:1:0,io_239:1:0,pwr_ext:2:12.313,io_66:1:12313,pwr_int:2:4.126,io_67:1:4126
-#D#200422;112200;2034.6566;N;10019.6076;W;0;0;2029.0;10;NA;NA;NA;NA;NA;prior:1:0,event_io_id:1:0,total_io:1:4,io_179:1:0,io_239:1:0,pwr_ext:2:12.313,io_66:1:12313,pwr_int:2:4.126,io_67:1:4126
-#D#200422;115200;2034.6566;N;10019.6076;W;0;0;2029.0;10;NA;NA;NA;NA;NA;prior:1:0,event_io_id:1:0,total_io:1:4,io_179:1:0,io_239:1:0,pwr_ext:2:12.313,io_66:1:12313,pwr_int:2:4.126,io_67:1:4126
-#D#200422;122200;2034.6566;N;10019.6076;W;0;0;2027.0;9;NA;NA;NA;NA;NA;prior:1:0,event_io_id:1:0,total_io:1:4,io_179:1:0,io_239:1:0,pwr_ext:2:12.313,io_66:1:12313,pwr_int:2:4.126,io_67:1:4126
-#D#200422;125200;2034.6566;N;10019.6076;W;0;0;2028.0;12;NA;NA;NA;NA;NA;prior:1:0,event_io_id:1:0,total_io:1:4,io_179:1:0,io_239:1:0,pwr_ext:2:12.313,io_66:1:12313,pwr_int:2:4.126,io_67:1:4126
-#D#200422;132200;2034.6566;N;10019.6076;W;0;0;2027.0;8;NA;NA;NA;NA;NA;prior:1:0,event_io_id:1:0,total_io:1:4,io_179:1:0,io_239:1:0,pwr_ext:2:12.312,io_66:1:12312,pwr_int:2:4.125,io_67:1:4125
+package = """#L#010192001;NA
+#D#220422;231153;2602.0036;N;09812.6626;W;0;205;0.0;12;NA;0;0;NA;NA;model:3:33,sw_ver:3:595,cell_id:1:1418974,mcc:1:334,mnc:1:40,lac:1:32105,rx_level:1:46,valid:1:1,mileage:2:312273013.0,pwr_ext:2:14.07,ign:1:1,msg_num:1:9436,h_meter:1:140912,pwr_int:2:4.0,msg_type:1:1,mode:1:2,rep_type:3:STT
 """
 
-package2 = """#L#010192001;NA
-#D#200422;135200;2034.6566;N;10019.6076;W;0;0;2027.0;12;NA;NA;NA;NA;NA;prior:1:0,event_io_id:1:0,total_io:1:4,io_179:1:0,io_239:1:0,pwr_ext:2:12.303,io_66:1:12303,pwr_int:2:4.125,io_67:1:4125
-#D#200422;142200;2034.6534;N;10019.6078;W;0;0;2035.0;11;NA;NA;NA;NA;NA;prior:1:0,event_io_id:1:0,total_io:1:4,io_179:1:0,io_239:1:0,pwr_ext:2:12.303,io_66:1:12303,pwr_int:2:4.125,io_67:1:4125
-#D#200422;145200;2034.6534;N;10019.6078;W;0;0;2038.0;12;NA;NA;NA;NA;NA;prior:1:0,event_io_id:1:0,total_io:1:4,io_179:1:0,io_239:1:0,pwr_ext:2:12.303,io_66:1:12303,pwr_int:2:4.125,io_67:1:4125
-#D#200422;152200;2034.6534;N;10019.6078;W;0;0;2048.0;12;NA;NA;NA;NA;NA;prior:1:0,event_io_id:1:0,total_io:1:4,io_179:1:0,io_239:1:0,pwr_ext:2:12.303,io_66:1:12303,pwr_int:2:4.123,io_67:1:4123
-#D#200422;155200;2034.6534;N;10019.6078;W;0;0;2041.0;12;NA;NA;NA;NA;NA;prior:1:0,event_io_id:1:0,total_io:1:4,io_179:1:0,io_239:1:0,pwr_ext:2:12.311,io_66:1:12311,pwr_int:2:4.123,io_67:1:4123
-#D#200422;160914;2034.6534;N;10019.6078;W;0;0;2039.0;12;NA;NA;NA;NA;NA;prior:1:0,event_io_id:1:0,total_io:1:4,io_179:1:0,io_239:1:0,pwr_ext:2:12.303,io_66:1:12303,pwr_int:2:4.123,io_67:1:4123
-#D#200422;163914;2034.6534;N;10019.6078;W;0;0;2035.0;12;NA;NA;NA;NA;NA;prior:1:0,event_io_id:1:0,total_io:1:4,io_179:1:0,io_239:1:0,pwr_ext:2:12.312,io_66:1:12312,pwr_int:2:4.122,io_67:1:4122
+package2 = """#L#865284045656521;NA
+#D#220422;231205;2034.6814;N;10024.2249;W;47;166;1809.0;12;NA;NA;NA;NA;NA;gnss_status:1:76,alarm:1:0,acc_x:2:0.2,acc_y:2:-0.1,acc_z:2:0.8,battery_percent:1:98,temp:1:34,front_light:2:1.8,pwr_int:2:4.0,solar_voltage:2:4.3,odom:1:25897815,status:1:1604,network_signal:1:100,acc_on:1:120,acc_off:1:3600,angle:1:20,distance:1:0,heart:1:0,settings_status:1:12500
+#D#220422;231210;2034.6535;N;10024.2345;W;48;207;1805.0;12;NA;NA;NA;NA;NA;gnss_status:1:76,alarm:1:0,acc_x:2:0.0,acc_y:2:-0.1,acc_z:2:0.9,battery_percent:1:97,temp:1:34,front_light:2:1.8,pwr_int:2:4.0,solar_voltage:2:5.5,odom:1:25897870,status:1:1612,network_signal:1:100,acc_on:1:120,acc_off:1:3600,angle:1:20,distance:1:0,heart:1:0,settings_status:1:12500
+#D#220422;231215;2034.6246;N;10024.2656;W;43;241;1803.0;12;NA;NA;NA;NA;NA;gnss_status:1:76,alarm:1:0,acc_x:2:0.0,acc_y:2:-0.1,acc_z:2:0.9,battery_percent:1:98,temp:1:34,front_light:2:1.8,pwr_int:2:4.0,solar_voltage:2:5.5,odom:1:25897947,status:1:1612,network_signal:1:100,acc_on:1:120,acc_off:1:3600,angle:1:20,distance:1:0,heart:1:0,settings_status:1:12500
+#D#220422;231223;2034.6129;N;10024.3159;W;46;265;1807.0;10;NA;NA;NA;NA;NA;gnss_status:1:74,alarm:1:0,acc_x:2:0.0,acc_y:2:-0.2,acc_z:2:1.0,battery_percent:1:98,temp:1:34,front_light:2:1.8,pwr_int:2:4.0,solar_voltage:2:5.5,odom:1:25898038,status:1:1612,network_signal:1:100,acc_on:1:120,acc_off:1:3600,angle:1:20,distance:1:0,heart:1:0,settings_status:1:12500
 """
 
 if __name__ == "__main__":
 	serialNumber = ""
 	serialNumber = retranslate(package, serialNumber)
+	serialNumber = ""
 	serialNumber = retranslate(package2, serialNumber)
