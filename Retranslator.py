@@ -102,7 +102,7 @@ def retranslate(packages, serialNumber):
 			param = p.split(":")
 			if param[0] in validParams:
 				data[validParams.get(param[0])]= param[2]
-		#print(str(serialNumber))
+		#print(str(data))#print(str(serialNumber))
 		if serialNumberAux in serialNumbersRC:
 			data["asset"] = serialNumbersRC.get(serialNumberAux)[0]
 			data["customerId"]=serialNumbersRC.get("customerId")
@@ -122,19 +122,16 @@ def retranslate(packages, serialNumber):
 
 #test data 
 
-package = """#L#010192001;NA
-#D#220422;231153;2602.0036;N;09812.6626;W;0;205;0.0;12;NA;0;0;NA;NA;model:3:33,sw_ver:3:595,cell_id:1:1418974,mcc:1:334,mnc:1:40,lac:1:32105,rx_level:1:46,valid:1:1,mileage:2:312273013.0,pwr_ext:2:14.07,ign:1:1,msg_num:1:9436,h_meter:1:140912,pwr_int:2:4.0,msg_type:1:1,mode:1:2,rep_type:3:STT
+package = """#L#352094089692658;NA
+#D#230422;000124;2034.6419;N;10019.6108;W;0;0;2030.0;10;NA;NA;NA;NA;NA;prior:1:0,event_io_id:1:0,total_io:1:4,io_179:1:0,io_239:1:0,pwr_ext:2:12.498,io_66:1:12498,pwr_int:2:4.023,io_67:1:4023
 """
 
 package2 = """#L#865284045656521;NA
 #D#220422;231205;2034.6814;N;10024.2249;W;47;166;1809.0;12;NA;NA;NA;NA;NA;gnss_status:1:76,alarm:1:0,acc_x:2:0.2,acc_y:2:-0.1,acc_z:2:0.8,battery_percent:1:98,temp:1:34,front_light:2:1.8,pwr_int:2:4.0,solar_voltage:2:4.3,odom:1:25897815,status:1:1604,network_signal:1:100,acc_on:1:120,acc_off:1:3600,angle:1:20,distance:1:0,heart:1:0,settings_status:1:12500
-#D#220422;231210;2034.6535;N;10024.2345;W;48;207;1805.0;12;NA;NA;NA;NA;NA;gnss_status:1:76,alarm:1:0,acc_x:2:0.0,acc_y:2:-0.1,acc_z:2:0.9,battery_percent:1:97,temp:1:34,front_light:2:1.8,pwr_int:2:4.0,solar_voltage:2:5.5,odom:1:25897870,status:1:1612,network_signal:1:100,acc_on:1:120,acc_off:1:3600,angle:1:20,distance:1:0,heart:1:0,settings_status:1:12500
-#D#220422;231215;2034.6246;N;10024.2656;W;43;241;1803.0;12;NA;NA;NA;NA;NA;gnss_status:1:76,alarm:1:0,acc_x:2:0.0,acc_y:2:-0.1,acc_z:2:0.9,battery_percent:1:98,temp:1:34,front_light:2:1.8,pwr_int:2:4.0,solar_voltage:2:5.5,odom:1:25897947,status:1:1612,network_signal:1:100,acc_on:1:120,acc_off:1:3600,angle:1:20,distance:1:0,heart:1:0,settings_status:1:12500
-#D#220422;231223;2034.6129;N;10024.3159;W;46;265;1807.0;10;NA;NA;NA;NA;NA;gnss_status:1:74,alarm:1:0,acc_x:2:0.0,acc_y:2:-0.2,acc_z:2:1.0,battery_percent:1:98,temp:1:34,front_light:2:1.8,pwr_int:2:4.0,solar_voltage:2:5.5,odom:1:25898038,status:1:1612,network_signal:1:100,acc_on:1:120,acc_off:1:3600,angle:1:20,distance:1:0,heart:1:0,settings_status:1:12500
 """
 
 if __name__ == "__main__":
 	serialNumber = ""
-	serialNumber = retranslate(package, serialNumber)
-	serialNumber = ""
 	serialNumber = retranslate(package2, serialNumber)
+	#serialNumber = ""
+	#serialNumber = retranslate(package2, serialNumber)

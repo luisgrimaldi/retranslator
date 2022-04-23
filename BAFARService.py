@@ -11,8 +11,8 @@ def insertUnits(data):
         <soapenv:Header/>
         <soapenv:Body>
         <urn:insertUnits soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">"""
-        usuario = "<user xsi:type='xsd:string'>testUser</user>"
-        password = "<pass xsi:type='xsd:string'>bafar</pass>"
+        usuario = "<user xsi:type='xsd:string'>trpatlan</user>"
+        password = "<pass xsi:type='xsd:string'>x0p0CXedPS</pass>"
         body2 = """<arrayOfUnits xsi:type="urn:items">
             <item xsi:type="urn:unit">"""
         placa = "<placa xsi:type='xsd:string'>"+data["asset"]+"</placa>"
@@ -39,9 +39,9 @@ def insertUnits(data):
         response = requests.post(url, data=body, headers=headers)
         if response.status_code != 200:
             Ex.saveError(response)
-            print(response.content.decode())
-        else:
-            Ex.saveOK(response)
-            print(response.content.decode())
+            #print(response.content.decode())
+        #else:
+            #Ex.saveOK(response)
+            #print(response.content.decode())
     except Exception as e:
         Ex.saveExcept("OS error: {0}".format(e))
