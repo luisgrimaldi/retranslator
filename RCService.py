@@ -4,7 +4,7 @@ import Exceptions as Ex
 
 
 def getToken():
-	url= "http://integraciones.qa.rcontrol.com.mx/Tracking/wcf/RCService.svc"
+	url= "http://gps.rcontrol.com.mx/Tracking/wcf/RCService.svc"
 	headers={'Content-Type':'text/xml;charset=UTF-8', 'SOAPAction':'http://tempuri.org/IRCService/GetUserToken', 'Accept':'application/xml'}
 
 	body="""<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:tem='http://tempuri.org/'>
@@ -13,7 +13,7 @@ def getToken():
 	<soapenv:Body>
 		<tem:GetUserToken>
 			<tem:userId>ws_avl_saverenlinea</tem:userId>
-			<tem:password>rSqx#468VQYw*0</tem:password>
+			<tem:password>tNfX$448tSfA*7</tem:password>
 		</tem:GetUserToken>
 	</soapenv:Body>
 	</soapenv:Envelope>"""
@@ -33,7 +33,7 @@ def getToken():
 
 def gpsAssetTracking(token, data):
 
-	url="http://integraciones.qa.rcontrol.com.mx/Tracking/wcf/RCService.svc"
+	url="http://gps.rcontrol.com.mx/Tracking/wcf/RCService.svc"
 	headers={'Content-Type':'text/xml;charset=UTF-8', 'SOAPAction':'http://tempuri.org/IRCService/GPSAssetTracking', 'Accept':'gzip,deflate'}
 	
 	body1="""<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:tem='http://tempuri.org/' xmlns:iron='http://schemas.datacontract.org/2004/07/IronTracking'>
@@ -74,11 +74,11 @@ def gpsAssetTracking(token, data):
 		
 		response = requests.post(url, data=body, headers=headers)
 		if response.status_code != 200:
+			#print(response.content.decode())
 			Ex.saveError(response)
-			#print(response.content.decode())
 		#else:
-			#Ex.saveOK(response)
 			#print(response.content.decode())
+			#Ex.saveOK(response)
 	
 	except Exception as e:
 		Ex.saveExcept("OS error: {0}".format(e))
