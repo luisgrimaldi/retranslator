@@ -1,5 +1,6 @@
 import RCService as RCS
 import BAFARService as BS
+import math
 
 
 
@@ -124,6 +125,69 @@ def retranslate(packages, serialNumber):
 
 	return serialNumberAux
 
+def convertCoordinates(type, coordinate, orientation):
+	lCoordinate = ""
+	lDegree = ""
+	lMinutes = ""
+	lSign = ""
+	if type == "lat":
+		lCoordinate = coordinate.split(".")
+		if len(lCoordinate[0]) == 4:
+			lDegree = int(lCoordinate[0][0:2])
+			lMinutes = lCoordinate[0][2:4] +"."+ lCoordinate[1]
+			lMinutes = float(lMinutes)/60
+			lCoordinate = lDegree + lMinutes
+
+		elif len(lCoordinate[0]) == 3:
+			lDegree = int("0" + lCoordinate[0][0:1])
+			lMinutes = lCoordinate[0][1:3] +"."+ lCoordinate[1]
+			lMinutes = float(lMinutes)/60
+			lCoordinate = lDegree + lMinutes
+
+		elif len(lCoordinate[0]) == 2:
+			lDegree = int("00")
+			lMinutes = lCoordinate[0] +"."+ lCoordinate[1]
+			lMinutes = float(lMinutes)/60
+			lCoordinate = lDegree + lMinutes
+
+	elif type == "lon":
+		lCoordinate = coordinate.split(".")
+		if len(lCoordinate[0]) == 5:
+			lDegree = int(lCoordinate[0][0:3])
+			lMinutes = lCoordinate[0][3:5] +"."+ lCoordinate[1]
+			lMinutes = float(lMinutes)/60
+			lCoordinate = lDegree + lMinutes
+			
+		elif len(lCoordinate[0]) == 4:
+			lDegree = int("0" + lCoordinate[0][0:2])
+			lMinutes = lCoordinate[0][2:4] +"."+ lCoordinate[1]
+			lMinutes = float(lMinutes)/60
+			lCoordinate = lDegree + lMinutes
+
+		elif len(lCoordinate[0]) == 3:
+			lDegree = int("00" + lCoordinate[0][0:1])
+			lMinutes = lCoordinate[0][1:3] +"."+ lCoordinate[1]
+			lMinutes = float(lMinutes)/60
+			lCoordinate = lDegree + lMinutes
+
+		elif len(lCoordinate[0]) == 2:
+			lDegree = int("000")
+			lMinutes = lCoordinate[0] +"."+ lCoordinate[1]
+			lMinutes = float(lMinutes)/60
+			lCoordinate = lDegree + lMinutes
+
+	if orientation == "S" or orientation == "W":
+		lSign = "-"
+			
+	if len(str(lCoordinate).split(".")[1]) > 6:
+		lCoordinate = "{:.6f}".format(lCoordinate)
+	else:
+		lCoordinate = str(lCoordinate)
+	
+	lCoordinate = lSign + lCoordinate
+
+	return lCoordinate
+
 
 #test data 
 
@@ -132,14 +196,16 @@ package = """#L#010192001;NA
 """
 
 package2 = """#L#865284045656521;NA
-#D#220422;231205;2034.6814;N;10024.2249;W;47;166;1809.0;12;NA;NA;NA;NA;NA;gnss_status:1:76,alarm:1:0,acc_x:2:0.2,acc_y:2:-0.1,acc_z:2:0.8,battery_percent:1:98,temp:1:34,front_light:2:1.8,pwr_int:2:4.0,solar_voltage:2:4.3,odom:1:25897815,status:1:1604,network_signal:1:100,acc_on:1:120,acc_off:1:3600,angle:1:20,distance:1:0,heart:1:0,settings_status:1:12500
+		#D#220422;231205;2034.6814;N;10024.2249;W;47;166;1809.0;12;NA;NA;NA;NA;NA;gnss_status:1:76,alarm:1:0,acc_x:2:0.2,acc_y:2:-0.1,acc_z:2:0.8,battery_percent:1:98,temp:1:34,front_light:2:1.8,pwr_int:2:4.0,solar_voltage:2:4.3,odom:1:25897815,status:1:1604,network_signal:1:100,acc_on:1:120,acc_off:1:3600,angle:1:20,distance:1:0,heart:1:0,settings_status:1:12500
 #D#220422;231210;2034.6535;N;10024.2345;W;48;207;1805.0;12;NA;NA;NA;NA;NA;gnss_status:1:76,alarm:1:0,acc_x:2:0.0,acc_y:2:-0.1,acc_z:2:0.9,battery_percent:1:97,temp:1:34,front_light:2:1.8,pwr_int:2:4.0,solar_voltage:2:5.5,odom:1:25897870,status:1:1612,network_signal:1:100,acc_on:1:120,acc_off:1:3600,angle:1:20,distance:1:0,heart:1:0,settings_status:1:12500
 #D#220422;231215;2034.6246;N;10024.2656;W;43;241;1803.0;12;NA;NA;NA;NA;NA;gnss_status:1:76,alarm:1:0,acc_x:2:0.0,acc_y:2:-0.1,acc_z:2:0.9,battery_percent:1:98,temp:1:34,front_light:2:1.8,pwr_int:2:4.0,solar_voltage:2:5.5,odom:1:25897947,status:1:1612,network_signal:1:100,acc_on:1:120,acc_off:1:3600,angle:1:20,distance:1:0,heart:1:0,settings_status:1:12500
 #D#220422;231223;2034.6129;N;10024.3159;W;46;265;1807.0;10;NA;NA;NA;NA;NA;gnss_status:1:74,alarm:1:0,acc_x:2:0.0,acc_y:2:-0.2,acc_z:2:1.0,battery_percent:1:98,temp:1:34,front_light:2:1.8,pwr_int:2:4.0,solar_voltage:2:5.5,odom:1:25898038,status:1:1612,network_signal:1:100,acc_on:1:120,acc_off:1:3600,angle:1:20,distance:1:0,heart:1:0,settings_status:1:12500
 """
 
 if __name__ == "__main__":
-	serialNumber = ""
-	serialNumber = retranslate(package, serialNumber)
+	#serialNumber = ""
+	#serialNumber = retranslate(package, serialNumber)
 	#serialNumber = ""
 	#serialNumber = retranslate(package2, serialNumber)
+	print(convertCoordinates("lat", "5544.6025", "N"))
+	print(convertCoordinates("lon", "03739.6834", "E"))
