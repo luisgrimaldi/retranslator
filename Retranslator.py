@@ -52,7 +52,7 @@ def retranslate(packages, serialNumber):
 		"timestamp":"",
 		#"acceleration":None,
 		"temperature":{
-			"temp1":""
+			"Temp1":""
 		}
 	}
 	#[placa]
@@ -151,7 +151,7 @@ def retranslate(packages, serialNumber):
 			dataNubus["lat"] = float(x[2])
 			dataNubus["lng"] = float(x[4])
 			dataNubus["timestamp"] = int(dateToTimestamp(data["date"]))
-			dataNubus["temperature"]["temp1"] = float(data["temperature"])
+			dataNubus["temperature"]["Temp1"] = float(data["temperature"])
 			print("NUBUS	" + str(dataNubus))
 			NS.sendPositions(dataNubus)
 
