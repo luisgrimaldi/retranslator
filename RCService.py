@@ -75,13 +75,13 @@ def gpsAssetTracking(token, data):
 		response = requests.post(url, data=body, headers=headers)
 		if response.status_code != 200:
 			#print(response.content.decode())
-			Ex.saveError(response)
-		#else:
+			Ex.saveError(response, "RC")
+		else:
 			#print(response.content.decode())
-			#Ex.saveOK(response)
+			Ex.saveOK(response, "RC")
 	
 	except Exception as e:
-		Ex.saveExcept("OS error: {0}".format(e))
+		Ex.saveExcept("OS error: {0}".format(e), "RC")
 
 	#print (response)
 	#return body
