@@ -1,18 +1,19 @@
 import RCService as RCS
 import BAFARService as BS
+import NUBUSService as NS
 import math
-
-
+from datetime import datetime
 
 def retranslate(packages, serialNumber):
 	validParams= {
-    "pwr_ext":"battery",
-	"accum_0":"battery", #LMU-300
-	"io_239":"ignition", #Teltonika
-	"ign":"ignition",	 #Suntech
-	#"tr-status":"ignition", #Xeelectech LK210
-	"odom": "odometer"   #Topflytech TLP1-SF
-	}	
+    		"pwr_ext":"battery",
+		"accum_0":"battery", #LMU-300
+		"io_239":"ignition", #Teltonika
+		"ign":"ignition",	 #Suntech
+		#"tr-status":"ignition", #Xeelectech LK210
+		"odom": "odometer",   #Topflytech TLP1-SF
+		"temperature": "temperature"
+	}
 
 	data = {
 		"altitude": "",
@@ -38,6 +39,22 @@ def retranslate(packages, serialNumber):
 		"temp":"",
 		"engine":""
 	}
+
+	dataNubus = {
+		"device_number": "",
+		"vehicle_code": "",
+		"lat":"",
+		"lng":"",
+		#"accuracy":None,
+		#"speed":None,
+		#"battery_level":None,
+		#"heading":None,
+		"timestamp":"",
+		#"acceleration":None,
+		"temperature":{
+			"temp1":""
+		}
+	}
 	#[placa]
 	serialNumbersRC={
 		"customerName":"MIGUEL MARIO INZUNZA LUQUE",
@@ -45,7 +62,9 @@ def retranslate(packages, serialNumber):
 		"010182033":["35AB3D"],
 		"352094089692658":["36AG9D"],
 		"862522030189922":["30AB3D"],
-		"1332012441":["71AB2D"]
+		"1332012441":["71AB2D"],
+		"860896051281699":["66AB2D"],
+		"860896051825248":["94AZ9A"]
 	}
 	#[placa, tipoUnidad, Economico]
 	serialNumbersBAFAR={
@@ -66,19 +85,23 @@ def retranslate(packages, serialNumber):
 		"865284040021697":["952UP2","2", "1997"],
 		"868899049001973":["580M", "6", ""]
 	}
+	#[placa]
+	serialNumberNubus={
+		"358480080906508":["41AT9P"],
+		"865284040201836":["03AT5R"]
+	}
 
 	packages = packages.replace(" ","")
 	packages = packages.split("\n")
 	serialNumberAux = ""
 	if serialNumber:
 		serialNumberAux = serialNumber
-	
+
 	for package in packages:
 		if package[0:3] != "#D#":
 			if package[0:3] == "#L#":
 				serialNumberAux=package[3:len(package)-4]
 			continue
-				
 		x = package[3:len(package)].split(";")
 
 		if x[2] == "NA":
@@ -120,8 +143,23 @@ def retranslate(packages, serialNumber):
 			data["asset"] = serialNumbersBAFAR.get(serialNumberAux)[0]
 			data["unitType"] = serialNumbersBAFAR.get(serialNumberAux)[1]
 			data["economico"] = serialNumbersBAFAR.get(serialNumberAux)[2]
-			BS.insertUnits(data)		
+			BS.insertUnits(data)
 			#print("BAFAR	"+str(data))
+		elif serialNumberAux in serialNumberNubus:
+			dataNubus["device_number"] = serialNumberNubus.get(serialNumberAux)[0]
+			dataNubus["vehicle_code"] = serialNumberNubus.get(serialNumberAux)[0]
+			dataNubus["lat"] = float(x[2])
+			dataNubus["lng"] = float(x[4])
+			dataNubus["timestamp"] = int(dateToTimestamp(data["date"]))
+			dataNubus["temperature"]["temp1"] = float(data["temperature"])
+			print("NUBUS	" + str(dataNubus))
+			NS.sendPositions(dataNubus)
+
+		#"timestamp":"",
+		#"temperature":{
+    #  "temp1":""
+    #}
+	  #}
 
 	return serialNumberAux
 
@@ -188,6 +226,14 @@ def convertCoordinates(type, coordinate, orientation):
 
 	return lCoordinate
 
+def dateToTimestamp(date):
+	#YYYY-MM-DDTHH:MM:SS
+	#date="2023-06-18T07:28:14"
+
+
+	dt_obj = datetime.strptime(date[8:10]+"."+date[5:7]+"."+date[0:4]+" "+date[11:13]+":"+date[14:16]+":"+date[17:19], '%d.%m.%Y %H:%M:%S')
+	millisec = dt_obj.timestamp() * 1000
+	return str(int(millisec))
 
 #test data 
 
