@@ -38,10 +38,10 @@ def insertUnits(data):
         body = body1 + usuario + password + body2 + placa + economico + timestamp + latitude + longitude + height + odometer + speed + course + sats + event + temp + unitType + engine + body3
         response = requests.post(url, data=body, headers=headers)
         if response.status_code != 200:
-            Ex.saveError(response)
+            Ex.saveError(response, "BAFAR")
             #print(response.content.decode())
-        #else:
-            #Ex.saveOK(response)
+        else:
+            Ex.saveOK(response, "BAFAR")
             #print(response.content.decode())
     except Exception as e:
-        Ex.saveExcept("OS error: {0}".format(e))
+        Ex.saveExcept("OS error: {0}".format(e), "BAFAR")
