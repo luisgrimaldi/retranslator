@@ -7,10 +7,10 @@ def sendPositions(data):
 	url="https://external.driv.in/api/external/v2/positions"
 	headers={'X-API-Key': '03005362-d358-4d2b-823f-0acce16d2401', 'Content-Type': 'application/json'}
 	positions= { "positions":[ data ] }
-	print(positions)
+	#print(positions)
 	try:
 
-		response = requests.post(url, data=json.dumps(data), headers=headers)
+		response = requests.post(url, data=json.dumps(positions), headers=headers)
 		if response.status_code != 201:
 			#print(response.content.decode())
 			Ex.saveError(response, "NUBUS")
