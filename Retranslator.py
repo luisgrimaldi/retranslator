@@ -59,12 +59,12 @@ def retranslate(packages, serialNumber):
 	serialNumbersRC={
 		"customerName":"MIGUEL MARIO INZUNZA LUQUE",
 		"customerId":"41013",
-		"010182033":["35AB3D"],
-		"352094089692658":["36AG9D"],
-		"862522030189922":["30AB3D"],
-		"1332012441":["71AB2D"],
-		"860896051281699":["66AB2D"],
-		"860896051825248":["94AZ9A"]
+		"352094089692658":["36AG9D"],#ECO. 01 2001
+		"010182033":["35AB3D"],#ECO. 02
+		"1332012441":["71AB2D"],#ECO 03 2008
+		"862522030189922":["30AB3D"],#ECO. 04 2007
+		"1333120954":["66AB2D"],#ECO. 05 2008
+		"860896051825248":["94AZ9A"]#ECO. 06
 	}
 	#[placa, tipoUnidad, Economico]
 	serialNumbersBAFAR={
@@ -130,11 +130,13 @@ def retranslate(packages, serialNumber):
 			param = p.split(":")
 			if param[0] in validParams:
 				data[validParams.get(param[0])]= param[2]
-		#print(str(serialNumber))
+		#print("-"+str(serialNumberAux)+"-")
+		#print(str(serialNumbersRC))
 		if serialNumberAux in serialNumbersRC:
 			data["asset"] = serialNumbersRC.get(serialNumberAux)[0]
 			data["customerId"]=serialNumbersRC.get("customerId")
 			data["customerName"]=serialNumbersRC.get("customerName")
+			#print(str(serialNumberAux))
 			#print("RC	"+str(data))
 			token = RCS.getToken()
 			if token:
@@ -143,8 +145,8 @@ def retranslate(packages, serialNumber):
 			data["asset"] = serialNumbersBAFAR.get(serialNumberAux)[0]
 			data["unitType"] = serialNumbersBAFAR.get(serialNumberAux)[1]
 			data["economico"] = serialNumbersBAFAR.get(serialNumberAux)[2]
-			BS.insertUnits(data)
 			#print("BAFAR	"+str(data))
+			BS.insertUnits(data)
 		elif serialNumberAux in serialNumberNubus:
 			dataNubus["device_number"] = serialNumberNubus.get(serialNumberAux)[0]
 			dataNubus["vehicle_code"] = serialNumberNubus.get(serialNumberAux)[0]
@@ -152,7 +154,7 @@ def retranslate(packages, serialNumber):
 			dataNubus["lng"] = float(x[4])
 			dataNubus["timestamp"] = int(dateToTimestamp(data["date"]))
 			dataNubus["temperature"]["Temp1"] = float(data["temperature"])
-			print("NUBUS	" + str(dataNubus))
+			#print("NUBUS	" + str(dataNubus))
 			NS.sendPositions(dataNubus)
 
 		#"timestamp":"",
@@ -248,10 +250,14 @@ package2 = """#L#865284045656521;NA
 #D#220422;231223;2034.6129;N;10024.3159;W;46;265;1807.0;10;NA;NA;NA;NA;NA;gnss_status:1:74,alarm:1:0,acc_x:2:0.0,acc_y:2:-0.2,acc_z:2:1.0,battery_percent:1:98,temp:1:34,front_light:2:1.8,pwr_int:2:4.0,solar_voltage:2:5.5,odom:1:25898038,status:1:1612,network_signal:1:100,acc_on:1:120,acc_off:1:3600,angle:1:20,distance:1:0,heart:1:0,settings_status:1:12500
 """
 
+package3 =  """#L#862476050652014;NA
+#D#210623;202750;2447.3913;N;10338.6211;W;43;301;1734.000000;18;NA;NA;NA;NA;NA;prior:1:0,event_io_id:1:0,total_io:1:9,io_239:1:1,io_240:1:1,gsm:1:1,io_21:1:1,io_200:1:0,pwr_ext:2:14.045000,io_66:1:14045,pwr_int:2:4.061000,io_67:1:4061,io_68:1:0,io_9:1:217,io_16:1:70956376
+"""
+
 if __name__ == "__main__":
-	#serialNumber = ""
+	serialNumber = ""
 	#serialNumber = retranslate(package, serialNumber)
-	#serialNumber = ""
-	#serialNumber = retranslate(package2, serialNumber)
-	print(convertCoordinates("lat", "5544.6025", "N"))
-	print(convertCoordinates("lon", "03739.6834", "E"))
+	#print(package2)
+	serialNumber = retranslate(package3, serialNumber)
+	#print(convertCoordinates("lat", "5544.6025", "N"))
+	#print(convertCoordinates("lon", "03739.6834", "E"))
