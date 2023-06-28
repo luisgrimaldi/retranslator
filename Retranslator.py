@@ -150,8 +150,8 @@ def retranslate(packages, serialNumber):
 		elif serialNumberAux in serialNumberNubus:
 			dataNubus["device_number"] = serialNumberNubus.get(serialNumberAux)[0]
 			dataNubus["vehicle_code"] = serialNumberNubus.get(serialNumberAux)[0]
-			dataNubus["lat"] = float(x[2])
-			dataNubus["lng"] = float(x[4])
+			dataNubus["lat"] = float(convertCoordinates("lat",x[2], x[3]))
+			dataNubus["lng"] = float(convertCoordinates("lon",x[4], x[5]))
 			dataNubus["timestamp"] = int(dateToTimestamp(data["date"]))
 			dataNubus["temperature"]["Temp1"] = float(data["temperature"])
 			#print("NUBUS	" + str(dataNubus))
@@ -250,7 +250,7 @@ package2 = """#L#865284045656521;NA
 #D#220422;231223;2034.6129;N;10024.3159;W;46;265;1807.0;10;NA;NA;NA;NA;NA;gnss_status:1:74,alarm:1:0,acc_x:2:0.0,acc_y:2:-0.2,acc_z:2:1.0,battery_percent:1:98,temp:1:34,front_light:2:1.8,pwr_int:2:4.0,solar_voltage:2:5.5,odom:1:25898038,status:1:1612,network_signal:1:100,acc_on:1:120,acc_off:1:3600,angle:1:20,distance:1:0,heart:1:0,settings_status:1:12500
 """
 
-package3 =  """#L#862476050652014;NA
+package3 =  """#L#358480080906508;NA
 #D#210623;202750;2447.3913;N;10338.6211;W;43;301;1734.000000;18;NA;NA;NA;NA;NA;prior:1:0,event_io_id:1:0,total_io:1:9,io_239:1:1,io_240:1:1,gsm:1:1,io_21:1:1,io_200:1:0,pwr_ext:2:14.045000,io_66:1:14045,pwr_int:2:4.061000,io_67:1:4061,io_68:1:0,io_9:1:217,io_16:1:70956376
 """
 
@@ -259,5 +259,5 @@ if __name__ == "__main__":
 	#serialNumber = retranslate(package, serialNumber)
 	#print(package2)
 	serialNumber = retranslate(package3, serialNumber)
-	#print(convertCoordinates("lat", "5544.6025", "N"))
-	#print(convertCoordinates("lon", "03739.6834", "E"))
+	#print(convertCoordinates("lat", "2525.5593", "N"))
+	#print(convertCoordinates("lon", "10809.8438", "E"))
