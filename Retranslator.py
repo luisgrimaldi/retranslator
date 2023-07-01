@@ -59,7 +59,7 @@ def retranslate(packages, serialNumber):
 	serialNumbersRC={
 		"customerName":"MIGUEL MARIO INZUNZA LUQUE",
 		"customerId":"41013",
-		"352094089692658":["36AG9D"],#ECO. 01 2001
+		"352094089692658":["36AB3D"],#ECO. 01 2001
 		"010182033":["35AB3D"],#ECO. 02
 		"1332012441":["71AB2D"],#ECO 03 2008
 		"862522030189922":["30AB3D"],#ECO. 04 2007
